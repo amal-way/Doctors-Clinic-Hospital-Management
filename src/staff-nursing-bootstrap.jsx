@@ -1,0 +1,4 @@
+import{createRoot}from'react-dom/client';import{StaffDirectory,NursingStation}from'./staff-nursing-module';import'./staff-nursing.css';
+const mount=(selector,Component)=>{const el=document.querySelector(selector);if(el&&!el.dataset.snMounted){el.dataset.snMounted='1';createRoot(el).render(<Component/>);}};
+const run=()=>{const h=document.querySelector('main h1')?.textContent||'';if(h.includes('Doctors & Staff')){const m=document.querySelector('main');if(m&&!document.querySelector('#staff-directory-root')){const r=document.createElement('div');r.id='staff-directory-root';m.appendChild(r);createRoot(r).render(<StaffDirectory/>);}}if(h.includes('Nursing'))mount('#nursing-station-root',NursingStation)};
+new MutationObserver(run).observe(document.body,{subtree:true,childList:true});setTimeout(run,300);
